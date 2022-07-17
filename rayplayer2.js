@@ -1,23 +1,27 @@
 let pos = 0;
 const audio = document.getElementById('audio');
 const songTitle = document.getElementById('songTitle');
-audio.addEventListener('ended',function(e){
-pos++;
-pos = ( pos === Songs.length )  ? 0 : pos;
-playSong(Shuffle[pos]);
-});
+function playNextSong() {
+    pos = ( pos === (Songs.length - 1) )  ? 0 : (pos + 1);
+    playSong(Shuffle[pos]);
+}
+audio.onended = playNextSong;
+audio.onerror = function() {
+  document.getElementById('idError').innerHTML += `${Songs[Shuffle[pos]]}<br>\n`;
+  playNextSong();
+}
 const audioSource = id => `<source type="audio/${Songs[id].slice(-3)}" src="${encodeURI(Songs[id])}">
 Sorry, your browser does not support HTML5 audio.`;
 const optSong = id => `<option value="${id}">${Songs[Shuffle[id]]}`;
 function playSong(id) {
-audio.innerHTML = audioSource(id);
-audio.load();
-audio.play();
-songTitle.innerHTML = `<p>${Songs[id]}</p>`;
-document.getElementById("mySong").value = pos;
+  audio.innerHTML = audioSource(id);
+  audio.load();
+  audio.play();
+  songTitle.innerHTML = `<p>${Songs[id]}</p>`;
+  document.getElementById("mySong").value = pos;
 }
 function gotoSong() {
-  const j = document.getElementById("mySong").value;
+  const j = parseInt(document.getElementById("mySong").value);
   if (j == pos) return;
   pos = j;
   playSong(Shuffle[pos]);
@@ -30,6 +34,6 @@ function shuffleArray(array) {
 }
 const Shuffle = Songs.map((s, i) => i);
 shuffleArray(Shuffle);
-playSong(Shuffle[pos]);
 document.getElementById("mySong").innerHTML = `${Songs.map((s, i) => optSong(i)).join('\n')}`;
+playSong(Shuffle[pos]);
 
