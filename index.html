@@ -7,13 +7,12 @@
     <title>rayplayer</title>
 </head>
 <body>
-    <audio id="audio" preload="auto" controls="">
-<source type="audio/mp3" src="">
-Sorry, your browser does not support HTML5 audio.
-</audio>
-
+   <audio id="audio" preload="auto" controls=""></audio>
    <div id="songTitle"></div> 
-   <div id="idSong"></div> 
+   <input type="checkbox" id="myShuffleplay" name="shuffleplay" value="shuffleplay" checked>
+   <label for="shuffleplay">Shuffle</label>
+   <br>
+   <select name="mySong" id="mySong" size="10" onchange="gotoSong()"></select>
 </body>
 <script src="songs.js"></script>
 <script src="rayplayer.js"></script>
