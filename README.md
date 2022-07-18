@@ -12,5 +12,8 @@ wget https://raw.githubusercontent.com/raylexlee/rayplayer/main/rayplayer.html
 ```
 # Procedure
 Using a modern browswe, open the rayplayer.html inside the folder.
+# Screenshots
+Google Chrome on Windows 11 Home
 ![Sample Screenshot](sample.png)
-
+Safari on Mac OSX Sierra
+![Sample Screenshot](sample2.png)
