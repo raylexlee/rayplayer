@@ -11,13 +11,22 @@ echo ] >> songs.js
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rayplayer</title>
+<style>
+body, select {
+  background-color: black;
+  color:cornsilk;
+}
+audio {background:#666;width:94%;padding:20px;}
+select {max-width:98%}
+</style>
 </head>
 <body>
    <audio id="audio" preload="auto" controls=""></audio>
-   <div id="songTitle"></div> 
+   <div id="songTitle"></div>
+   <p> 
    <input type="checkbox" id="myShuffleplay" name="shuffleplay" value="shuffleplay" checked>
    <label for="shuffleplay">Shuffle</label>
-   <br>
+   </p>
    <select name="mySong" id="mySong" size="10" onchange="gotoSong()"></select>
 </body>
 <script src="songs.js"></script>
