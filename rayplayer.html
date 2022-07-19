@@ -1,9 +1,9 @@
 <!DOCTYPE html>
+<!-- Version : 19 July 2022 -->
 <!-- Source : https://raw.githubusercontent.com/raylexlee/rayplayer/main/rayplayer.html
 echo const Songs = [ > songs.js
 find . -name "*.mp3" -or -name "*.ogg" | sed 's#\(.*\)#"\1",#' >> songs.js
 echo ] >> songs.js
-wget https://raw.githubusercontent.com/raylexlee/rayplayer/main/rayplayer.html
 -->
 <html lang="en">
 <head>
@@ -44,7 +44,7 @@ Sorry, your browser does not support HTML5 audio.`;
 };
 const optSong = id => {
   const songId = document.getElementById('myShuffleplay').checked ? Shuffle[id] : id;
-  return `<option value="${id}">${Songs[songId]}`;
+  return `<option value="${id}">${Songs[songId].replace(/.*\/([^\/]*)/,'$1')}`;
   };
 function playSong() {
   const id = document.getElementById('myShuffleplay').checked ? Shuffle[pos] : pos;
