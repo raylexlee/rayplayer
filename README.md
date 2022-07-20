@@ -14,7 +14,7 @@ For Window users not having WSL installed, open the powershell at the folder.
 ```
 $data = (dir -recurse -ea 0 | % FullName | sls "\.(mp3|ogg)$")
 "const Songs = [" > songs.js
-$data | ForEach-Object -Process {"$PSItem".Replace($pwd,"'.").Replace("\","/").Replace("mp3","mp3',").Replace("ogg","ogg',")} >> songs.js
+$data | ForEach-Object -Process {"$PSItem".Replace($pwd,'".').Replace("\","/").Replace("mp3",'mp3",').Replace("ogg",'ogg",')} >> songs.js
 "]" >> songs.js
 ```
 and download rayplayer.html
