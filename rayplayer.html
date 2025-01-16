@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version : 19 July 2022 -->
+<!-- Version : 16 January 2025 -->
 <!-- Source : https://raw.githubusercontent.com/raylexlee/rayplayer/main/rayplayer.html
 echo const Songs = [ > songs.js
 find . -name "*.mp3" -or -name "*.ogg" | sed 's#\(.*\)#"\1",#' >> songs.js
@@ -31,6 +31,12 @@ select {max-width:98%}
 </body>
 <script src="songs.js"></script>
 <script>
+let stop;
+const querystring = location.search;
+const params = (querystring != '') ? (new URL(document.location)).searchParams : 'none';
+if (params === 'none') window.location = 'rayplayer.html?stop=0';
+stop =  params.get('stop');
+stop = stop ? parseInt(stop) : 0;
 const Shuffle = Songs.map((s, i) => i);
 let pos = 0;
 document.getElementById('myShuffleplay').onchange = function() {
@@ -42,6 +48,8 @@ document.getElementById('myShuffleplay').onchange = function() {
 const audio = document.getElementById('audio');
 const songTitle = document.getElementById('songTitle');
 function playNextSong() {
+    stop--;
+    if (stop == 0) return;
     pos = ( pos === (Songs.length - 1) )  ? 0 : (pos + 1);
     playSong();
 }
