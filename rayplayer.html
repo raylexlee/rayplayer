@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version : 16 January 2025 -->
+<!-- Vers30 June 2025 -->
 <!-- Source : https://raw.githubusercontent.com/raylexlee/rayplayer/main/rayplayer.html
 echo const Songs = [ > songs.js
 find . -name "*.mp3" -or -name "*.ogg" | sed 's#\(.*\)#"\1",#' >> songs.js
@@ -28,17 +28,29 @@ select {max-width:98%}
    <label for="shuffleplay">Shuffle</label>
    </p>
    <select name="mySong" id="mySong" size="10" onchange="gotoSong()"></select>
+   <p> 
+   <input type="checkbox" id="mySchedule" name="schedule" value="schedule" >
+   <label for="schedule">Schedule</label> <span id='sleep'>45</span> minutes
+    <input type="range" min="5" max="75" value="45" step="5" id="stop">
+   </p>
 </body>
 <script src="songs.js"></script>
 <script>
-let stop;
-const querystring = location.search;
-const params = (querystring != '') ? (new URL(document.location)).searchParams : 'none';
-if (params === 'none') window.location = 'rayplayer.html?stop=0';
-stop =  params.get('stop');
-stop = stop ? parseInt(stop) : 0;
+const stop = document.getElementById('stop');
+stop.onchange = () => { document.getElementById('sleep').innerText = stop.value; }
+let scheduleID = -1;
 const Shuffle = Songs.map((s, i) => i);
 let pos = 0;
+const mySchedule = document.getElementById('mySchedule');
+mySchedule.onchange = function() {
+  if (this.checked) { 
+    scheduleStop(stop.value);
+    } else {
+    if (scheduleID == -1) return;
+    cleanTimeout(scheduleID);
+    scheduleID = -1;
+  }
+}
 document.getElementById('myShuffleplay').onchange = function() {
   if (this.checked) shuffleArray(Shuffle); 
   document.getElementById("mySong").innerHTML = `${Songs.map((s, i) => optSong(i)).join('\n')}`;
@@ -47,9 +59,10 @@ document.getElementById('myShuffleplay').onchange = function() {
 };
 const audio = document.getElementById('audio');
 const songTitle = document.getElementById('songTitle');
+function scheduleStop(duration) {
+  scheduleID = setTimeout(() => { audio.pause(); mySchedule.checked = false; }, duration * 60 * 1000);
+}
 function playNextSong() {
-    stop--;
-    if (stop == 0) return;
     pos = ( pos === (Songs.length - 1) )  ? 0 : (pos + 1);
     playSong();
 }
