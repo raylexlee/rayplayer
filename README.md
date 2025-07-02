@@ -23,7 +23,10 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/raylexlee/rayplayer/mai
 ```
 # Procedure
 Using a modern browswe, open the rayplayer.html inside the folder.
-# Screenshots
+# Screenshots for 30 June 2025 version
+Firefox on Windows 11 Home
+![Sample Screenshot](sample2July2025.png)
+# Screenshots for old version
 Microsoft Edge on Windows 11 Home
 ![Sample Screenshot](sample.png)
 Safari on Mac OSX Sierra
