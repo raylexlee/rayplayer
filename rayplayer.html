@@ -69,7 +69,7 @@ function playNextSong() {
 audio.onended = playNextSong;
 function audioSource() { 
   const id = document.getElementById('myShuffleplay').checked ? Shuffle[pos] : pos;
-  return `<source type="audio/${Songs[id].slice(-3)}" src="${encodeURI(Songs[id]).replaceAll('?','%3F')}">
+  return `<source type="audio/${Songs[id].slice(-3)}" src="${encodeURI(Songs[id]).replaceAll('?','%3F').replaceAll('#','%23')}">
 Sorry, your browser does not support HTML5 audio.`;
 };
 const optSong = id => {
