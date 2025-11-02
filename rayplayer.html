@@ -82,6 +82,7 @@ function playSong() {
   audio.load();
   audio.play();
   songTitle.innerHTML = `<p>${Songs[id]}</p>`;
+  document.title =  `${Songs[id].replace(/.*\/([^\/]*)/,'$1')}`;
   document.getElementById("mySong").value = pos;
 }
 function gotoSong() {
